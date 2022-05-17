@@ -32,7 +32,7 @@ class TestOrario{
 					System.out.println("dammi i secondi");
 					secondi=input.nextInt();
 					vuota=input.nextLine();	
-					orario1 = new orario(nome,ore,minuti,secondi);
+					orari[i] = new orario(nome,ore,minuti,secondi);
 					i++;
 				}else{
 					System.out.println("orari pieni");
