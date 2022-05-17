@@ -57,16 +57,16 @@ class TestOrario{
                 break;
 
             case 4:
-							trovato=false;
-							System.out.println("dammi il nome");
-							nome_temp=input.nextLine();
-							for(cont=0;cont<i;cont++){
-								if(nome_temp.equals(orari[cont].nome)){
-									trovato=true;
-									System.out.println("orario "+temp+": "+orari[cont].ore+":"+orari[cont].minuti+":"+orari[cont].secondi+", citta' = "+orari[cont].nome+", e' solare = "+orari[cont].is_solare);
-								}
-							}
-							if (!trovato) {
-								System.out.println("orario non trovato");
-							}
-							break;
+		trovato=false;
+		System.out.println("dammi il nome");
+		nome_temp=input.nextLine();
+		for(cont=0;cont<i;cont++){
+			if(nome_temp.equals(orari[cont].nome)){
+				trovato=true;
+				System.out.println("orario "+temp+": "+orari[cont].ore+":"+orari[cont].minuti+":"+orari[cont].secondi+", citta' = "+orari[cont].nome+", e' solare = "+orari[cont].is_solare);
+			}
+		}
+		if (!trovato) {
+			System.out.println("orario non trovato");
+		}
+		break;
