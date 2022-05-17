@@ -3,7 +3,7 @@ import java.util.*;
 class TestOrario{
 	public static void main(String arg[]){
 		Scanner input=new Scanner(System.in);
-		String nome, vuota, nome_input;
+		String nome, vuota, nome_temp;
     int ore, minuti, secondi, scelta, i=0, temp, cont;
     Boolean is_solare;
 		Orario orari[]=new Orario[100];
@@ -52,10 +52,21 @@ class TestOrario{
 
             case 3:
                 for(cont=0; cont<i;cont++){
-                  System.out.println("orario "+temp+": "+orari[cont].d"+orari[i].minuti+":"+orari[i].secondi+", citta' = "+orari[i].nome+", e' solare = "+orari[i].is_solare);
+                  System.out.println("orario "+temp+": "+orari[cont].ore+":"+orari[cont].minuti+":"+orari[cont].secondi+", citta' = "+orari[cont].nome+", e' solare = "+orari[cont].is_solare);
                 }
                 break;
 
             case 4:
-                orario1.legale();
-                break;
+							trovato=false;
+							System.out.println("dammi il nome");
+							nome_temp=input.nextLine();
+							for(cont=0;cont<i;cont++){
+								if(nome_temp.equals(orari[cont].nome)){
+									trovato=true;
+									System.out.println("orario "+temp+": "+orari[cont].ore+":"+orari[cont].minuti+":"+orari[cont].secondi+", citta' = "+orari[cont].nome+", e' solare = "+orari[cont].is_solare);
+								}
+							}
+							if (!trovato) {
+								System.out.println("orario non trovato");
+							}
+							break;
