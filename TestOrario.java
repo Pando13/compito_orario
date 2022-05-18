@@ -25,7 +25,7 @@ class TestOrario{
 				break;
 
 			case 1:
-				if(i<1000){
+				if(i<100){
 					System.out.println("dammi il nome");
 					nome=input.nextLine();
 					System.out.println("dammi la nazione");
