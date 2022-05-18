@@ -4,7 +4,7 @@ class TestOrario{
 	public static void main(String arg[]){
 	Scanner input=new Scanner(System.in);
 	String nome, vuota, nome_temp, nazione;
-	int ore, minuti, secondi, scelta, i=0, temp, cont;
+	int ore, minuti, secondi, scelta, i=0, temp, cont, trovati;
 	Boolean is_solare, trovato;
 	Orario orari[]=new Orario[100];
 
@@ -110,12 +110,14 @@ class TestOrario{
 				System.out.println("Inserisci la Nazione: ");
 				nome_temp=input.nextLine();
 				temp = 0;
-
+				trovati=0;
+				//conto quanti orari della nazione in input
 				for(cont = 0; cont < i; cont++){
 					if(orari[cont].nazione.equals(nome_temp)){
 						temp++;
 					}
 				}
+				//inizializzo e riempio il vettore con gli orari della nazione in input
 				String subOrari[]=new String[temp];
 				temp=0;
 				for(cont = 0; cont < i; cont++){
@@ -129,29 +131,21 @@ class TestOrario{
 					System.out.println("Non ci sono fusi orari");
 					break;
 				}
-
-				if(subOrari.length == 1){
-					System.out.println("è presente 1 fuso orario");
-					break;
-				}
-
-				Orario temp2[] = new Orario[subOrari.length];
-				int j = 0;
-				for (int k=0; k<subOrari.length-1; k++){
-					if (subOrari[k].fullTime != subOrari[k+1].fullTime){
-						temp2[j++] = subOrari[k];
+				for(cont = 0; cont < subOrari.length; cont++){
+					if (subOrari[cont]==null){
+						continue;
 					}
-				}
-				temp2[j++] = subOrari[subOrari.length-1];
-				// Changing original array
-				for (int k=0; k<j; k++){
-					subOrari[k] = temp2[k];
-				}
+					for(temp = cont+1; temp<subOrari.length; temp++){
+						if(subOrari[cont].equals(subOrari[temp]))
+							subOrari[temp] = null;
 
-				if(j == 0){
-					System.out.println("Non sono presenti fuso orari diversi, solo uno");
+					}
+					trovati++;
+				}
+				if(trovati == 1){
+					System.out.println("è presente 1 fuso orario");
 				}else{
-					System.out.println("Sono presenti: " + j + "fusi orari diversi");
+					System.out.println("sono presenti " + trovati + " fusi orari");
 				}
 				break;
 
