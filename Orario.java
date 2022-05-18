@@ -43,4 +43,8 @@ class Orario {
     void visualizza(int temp){
         System.out.println("orario "+temp+": "+this.ore+":"+this.minuti+":"+this.secondi+", citta' = "+this.nome+", nazione = "+this.nazione+", e' solare = "+this.is_solare);
     }
+    
+    String getTime(){
+        return this.ore+":"+this.minuti+":"+this.secondi;
+    }
 }
