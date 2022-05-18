@@ -14,6 +14,9 @@ class TestOrario{
 		System.out.println("premi 2 per visualizzare un orario");
 		System.out.println("premi 3 per visualizzare gli orari inseriti");
 		System.out.println("premi 4 per visualizzare l'orario di una citta' presa in input");
+		System.out.println("premi 5 per impostare l'ora solare di una città il cui nome è preso in input");
+		System.out.println("premi 6 per impostare l'ora legale di una città il cui nome è preso in input");
+		System.out.println("premi 7 per vedere se per una nazione presa in input ci sono diversi fusi orari");
 		scelta=input.nextInt();
 		vuota=input.nextLine();
 
@@ -52,7 +55,7 @@ class TestOrario{
 				}
 				break;
 
-            case 3:
+            		case 3:
 				for(cont=0; cont<i;cont++){
 					orari[cont].visualizza(cont);
 				}
@@ -104,20 +107,6 @@ class TestOrario{
 				break;
 			
 			case 7:
-				temp=0;
-				System.out.println("dammi la nazione");
-				nome_temp=input.nextLine();
-				for(cont=0;cont<i;cont++){
-					if(nome_temp.equals(orari[cont].nazione)){
-						temp++;
-						trovato=true;
-					}
-				}
-				if (temp==0) {
-					System.out.println("nazione non trovata");
-				}else{
-					System.out.println("numero di orari di "+nome_temp+" = "+temp);
-				}
 				break;
 
 			default:
