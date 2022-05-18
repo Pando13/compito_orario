@@ -3,9 +3,9 @@ import java.util.*;
 class TestOrario{
 	public static void main(String arg[]){
 	Scanner input=new Scanner(System.in);
-	String nome, vuota, nome_temp;
+	String nome, vuota, nome_temp, nazione;
 	int ore, minuti, secondi, scelta, i=0, temp, cont;
-	Boolean is_solare;
+	Boolean is_solare, trovato;
 	Orario orari[]=new Orario[100];
 
 	do{
@@ -25,6 +25,8 @@ class TestOrario{
 				if(i<1000){
 					System.out.println("dammi il nome");
 					nome=input.nextLine();
+					System.out.println("dammi la nazione");
+					nazione=input.nextLine();
 					System.out.println("dammi le ore");
 					ore=input.nextInt();
 					System.out.println("dammi i minuti");
@@ -32,7 +34,7 @@ class TestOrario{
 					System.out.println("dammi i secondi");
 					secondi=input.nextInt();
 					vuota=input.nextLine();	
-					orari[i] = new orario(nome,ore,minuti,secondi);
+					orari[i] = new Orario(nome,ore,minuti,secondi,nazione);
 					i++;
 				}else{
 					System.out.println("orari pieni");
@@ -44,7 +46,7 @@ class TestOrario{
 				temp=input.nextInt();
 				vuota=input.nextLine();
 				if (temp >= 0 && temp <= i){
-					System.out.println("orario "+temp+": "+orari[i].ore+":"+orari[i].minuti+":"+orari[i].secondi+", citta' = "+orari[i].nome+", e' solare = "+orari[i].is_solare);
+					orari[temp].visualizza(temp);
 				}else{
 					System.out.println("errore");
 				}
@@ -52,7 +54,7 @@ class TestOrario{
 
             case 3:
 				for(cont=0; cont<i;cont++){
-					System.out.println("orario "+temp+": "+orari[cont].ore+":"+orari[cont].minuti+":"+orari[cont].secondi+", citta' = "+orari[cont].nome+", e' solare = "+orari[cont].is_solare);
+					orari[cont].visualizza(cont);
 				}
 				break;
 
@@ -63,10 +65,64 @@ class TestOrario{
 				for(cont=0;cont<i;cont++){
 					if(nome_temp.equals(orari[cont].nome)){
 						trovato=true;
-						System.out.println("orario "+temp+": "+orari[cont].ore+":"+orari[cont].minuti+":"+orari[cont].secondi+", citta' = "+orari[cont].nome+", e' solare = "+orari[cont].is_solare);
+						orari[cont].visualizza(cont);
 					}
 				}
 				if (!trovato) {
 					System.out.println("orario non trovato");
 				}
 				break;
+			
+			case 5:
+				trovato=false;
+				System.out.println("dammi il nome");
+				nome_temp=input.nextLine();
+				for(cont=0;cont<i;cont++){
+					if(nome_temp.equals(orari[cont].nome)){
+						orari[cont].solare();
+						trovato=true;
+					}
+				}
+				if (!trovato) {
+					System.out.println("orario non trovato");
+				}
+				break;
+			
+			case 6:
+				trovato=false;
+				System.out.println("dammi il nome");
+				nome_temp=input.nextLine();
+				for(cont=0;cont<i;cont++){
+					if(nome_temp.equals(orari[cont].nome)){
+						orari[cont].legale();
+						trovato=true;
+					}
+				}
+				if (!trovato) {
+					System.out.println("orario non trovato");
+				}
+				break;
+			
+			case 7:
+				temp=0;
+				System.out.println("dammi la nazione");
+				nome_temp=input.nextLine();
+				for(cont=0;cont<i;cont++){
+					if(nome_temp.equals(orari[cont].nazione)){
+						temp++;
+						trovato=true;
+					}
+				}
+				if (temp==0) {
+					System.out.println("nazione non trovata");
+				}else{
+					System.out.println("numero di orari di "+nome_temp+" = "+temp);
+				}
+				break;
+
+			default:
+				break;
+		}
+	}while(scelta!=0);
+}
+}
