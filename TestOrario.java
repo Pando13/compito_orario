@@ -5,7 +5,7 @@ class TestOrario{
 	Scanner input=new Scanner(System.in);
 	String nome, vuota, nome_temp, nazione;
 	int ore, minuti, secondi, scelta, i=0, temp, cont, trovati;
-	Boolean is_solare, trovato;
+	Boolean trovato;
 	Orario orari[]=new Orario[100];
 
 	do{
@@ -17,6 +17,7 @@ class TestOrario{
 		System.out.println("premi 5 per impostare l'ora solare di una città il cui nome è preso in input");
 		System.out.println("premi 6 per impostare l'ora legale di una città il cui nome è preso in input");
 		System.out.println("premi 7 per vedere se per una nazione presa in input ci sono diversi fusi orari");
+		System.out.println("premi 8 per vedere se per una nazione presa in input ci sono diversi nomi");
 		scelta=input.nextInt();
 		vuota=input.nextLine();
 
@@ -32,11 +33,13 @@ class TestOrario{
 					nazione=input.nextLine();
 					System.out.println("dammi le ore");
 					ore=input.nextInt();
+					vuota=input.nextLine();
 					System.out.println("dammi i minuti");
 					minuti=input.nextInt();
+					vuota=input.nextLine();
 					System.out.println("dammi i secondi");
 					secondi=input.nextInt();
-					vuota=input.nextLine();	
+					vuota=input.nextLine();
 					orari[i] = new Orario(nome,ore,minuti,secondi,nazione);
 					i++;
 				}else{
@@ -55,7 +58,7 @@ class TestOrario{
 				}
 				break;
 
-            		case 3:
+            case 3:
 				for(cont=0; cont<i;cont++){
 					orari[cont].visualizza(cont);
 				}
@@ -148,7 +151,50 @@ class TestOrario{
 					System.out.println("sono presenti " + trovati + " fusi orari");
 				}
 				break;
+			
+			case 8:
+			System.out.println("Inserisci la Nazione: ");
+			nome_temp=input.nextLine();
+			temp = 0;
+			trovati=0;
+			//conto quanti orari della nazione in input
+			for(cont = 0; cont < i; cont++){
+				if(orari[cont].nazione.equals(nome_temp)){
+					temp++;
+				}
+			}
+			//inizializzo e riempio il vettore con gli orari della nazione in input
+			String subNomi[]=new String[temp];
+			temp=0;
+			for(cont = 0; cont < i; cont++){
+				if(orari[cont].nazione.equals(nome_temp)){
+					subNomi[temp] = orari[cont].nome;
+					temp++;
+				}
+			}
+			
+			if(subNomi.length == 0){
+				System.out.println("Non ci sono orari di quella nazione");
+				break;
+			}
+			for(cont = 0; cont < subNomi.length; cont++){
+				if (subNomi[cont]==null){
+					continue;
+				}
+				for(temp = cont+1; temp<subNomi.length; temp++){
+					if(subNomi[cont].equals(subNomi[temp]))
+						subNomi[temp] = null;
 
+				}
+				trovati++;
+			}
+			if(trovati == 1){
+				System.out.println("è presente 1 orario della nazione "+nome_temp);
+			}else{
+				System.out.println("sono presenti " + trovati + " orari della nazione "+nome_temp);
+			}
+				break;
+			
 			default:
 				break;
 		}
