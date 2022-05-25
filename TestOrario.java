@@ -153,46 +153,75 @@ class TestOrario{
 				break;
 			
 			case 8:
-			System.out.println("Inserisci la Nazione: ");
-			nome_temp=input.nextLine();
-			temp = 0;
-			trovati=0;
-			//conto quanti orari della nazione in input
-			for(cont = 0; cont < i; cont++){
-				if(orari[cont].nazione.equals(nome_temp)){
-					temp++;
+				System.out.println("Inserisci la Nazione: ");
+				nome_temp=input.nextLine();
+				temp = 0;
+				trovati=0;
+				//conto quanti orari della nazione in input
+				for(cont = 0; cont < i; cont++){
+					if(orari[cont].nazione.equals(nome_temp)){
+						temp++;
+					}
 				}
-			}
-			//inizializzo e riempio il vettore con gli orari della nazione in input
-			String subNomi[]=new String[temp];
-			temp=0;
-			for(cont = 0; cont < i; cont++){
-				if(orari[cont].nazione.equals(nome_temp)){
-					subNomi[temp] = orari[cont].nome;
-					temp++;
+				//inizializzo e riempio il vettore con gli orari della nazione in input
+				String subNomi[]=new String[temp];
+				temp=0;
+				for(cont = 0; cont < i; cont++){
+					if(orari[cont].nazione.equals(nome_temp)){
+						subNomi[temp] = orari[cont].nome;
+						temp++;
+					}
 				}
-			}
-			
-			if(subNomi.length == 0){
-				System.out.println("Non ci sono orari di quella nazione");
-				break;
-			}
-			for(cont = 0; cont < subNomi.length; cont++){
-				if (subNomi[cont]==null){
-					continue;
+				
+				if(subNomi.length == 0){
+					System.out.println("Non ci sono orari di quella nazione");
+					break;
 				}
-				for(temp = cont+1; temp<subNomi.length; temp++){
-					if(subNomi[cont].equals(subNomi[temp]))
-						subNomi[temp] = null;
+				for(cont = 0; cont < subNomi.length; cont++){
+					if (subNomi[cont]==null){
+						continue;
+					}
+					for(temp = cont+1; temp<subNomi.length; temp++){
+						if(subNomi[cont].equals(subNomi[temp]))
+							subNomi[temp] = null;
 
+					}
+					trovati++;
 				}
-				trovati++;
-			}
-			if(trovati == 1){
-				System.out.println("è presente 1 orario della nazione "+nome_temp);
-			}else{
-				System.out.println("sono presenti " + trovati + " orari della nazione "+nome_temp);
-			}
+				if(trovati == 1){
+					System.out.println("è presente 1 orario della nazione "+nome_temp);
+				}else{
+					System.out.println("sono presenti " + trovati + " orari della nazione "+nome_temp);
+				}
+				break;
+			
+			case 9:
+				System.out.println("inserisci citta'");
+				nome_temp=input.nextLine();
+				trovato=false;
+				temp=0;
+				for (cont= 0; cont < i; cont++) {
+					if (orari[cont].equals(nome_temp)) {
+						temp=cont;
+						vuota=orari[cont].getTime();
+						trovato=true;
+						break;
+					}
+				}
+				if (!trovato) {
+					System.out.println("Non ci sono orari di quella citta'");
+				}else{
+					trovato=false;
+					for(cont = temp +1; cont < i; cont++){
+						if (orari[cont].getTime().equals(vuota)) {
+							orari[cont].visualizza(cont);
+							trovato=true;
+						}
+					}
+					if (!trovato){
+						System.out.println("non sono presenti altre citta' cont lo stesso orario");
+					}
+				}
 				break;
 			
 			default:
